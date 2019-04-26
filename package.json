@@ -1,0 +1,21 @@
+{
+  "name": "nodejs-server",
+  "version": "1.0.0",
+  "description": "using for leanring Node JS",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fireairforce/nodejs-server.git"
+  },
+  "keywords": [],
+  "author": "fireairforce",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fireairforce/nodejs-server/issues"
+  },
+  "homepage": "https://github.com/fireairforce/nodejs-server#readme",
+  "dependencies": {
+    "chalk": "^2.4.2"
+  }
+}
