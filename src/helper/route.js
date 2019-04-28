@@ -35,7 +35,7 @@ module.exports = async function(req,res,filePath){
               res.statusCode = 200;
               res.setHeader('Content-Type','text/html');
               const dir = path.relative(config.root,filePath)
-              console.log(chalk.green(dir))
+            //   console.log(chalk.green(dir))
               const data = {
                   titles:path.basename(filePath),
                   dir: dir? `/${dir}` : '',
