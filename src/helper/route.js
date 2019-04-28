@@ -14,7 +14,7 @@ module.exports = async function(req,res,filePath){
               const files = await readdir(filePath); // 这里一定要加上await的关键字
               res.statusCode = 200;
               res.setHeader('Content-Type','text/plain');
-              res.end(files.join(','))
+              res.end(files.join(','))  
           }
       } catch(ex) {
           console.log(ex)
