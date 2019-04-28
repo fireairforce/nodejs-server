@@ -32,7 +32,12 @@ module.exports = async function(req,res,filePath){
               const data = {
                   titles:path.basename(filePath),
                   dir: dir? `/${dir}` : '',
-                  files
+                  files:files.map(file=>{
+                      return {
+                          file,
+                          icon: mime(file)
+                      }
+                  })
               };
               res.end(template(data))  
           }
