@@ -15,6 +15,8 @@ const template = HandleBars.compile(source.toString())
 
 const mime = require('../helper/mime')
 
+const compress = require('./compress')
+
 module.exports = async function(req,res,filePath){
     try {
         const stats = await stat(filePath) 
@@ -22,7 +24,12 @@ module.exports = async function(req,res,filePath){
             const contentType = mime(filePath);
             res.statusCode = 200;
             res.setHeader('Content-Type',contentType)
-            fs.createReadStream(filePath).pipe(res)
+            let rs = fs.createReadStream(filePath);
+            if(filePath.match(config.compress)){
+                rs =compress(rs,req,res);
+            }
+            // fs.createReadStream(filePath).pipe(res)
+            rs.pipe(res)
           } else if(stats.isDirectory()) {
               const files = await readdir(filePath); // 这里一定要加上await的关键字
               res.statusCode = 200;
