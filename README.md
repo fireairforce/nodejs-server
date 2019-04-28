@@ -12,3 +12,17 @@ using for leanring Node JS
 - build :改变了build工具 如 grunt换成了 npm
 - revert: 撤销上一次的 commit 
 
+## download
+```
+npm install -g anydoor
+```
+
+## useage
+```
+anydoor        # start the server
+
+anydoor -p 8080 # set the port as 8080
+
+anydoor -h localhost #set the port as localhost
+
+```

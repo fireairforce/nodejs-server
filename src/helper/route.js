@@ -4,7 +4,7 @@ const stat = promisify(fs.stat);
 const readdir = promisify(fs.readdir); // 让一些异步操作能够写成同步的形式
 const HandleBars = require('handlebars');
 const path = require('path');
-const config = require('../config/defaultConfig')
+// const config = require('../config/defaultConfig')
 const chalk = require('chalk')
 
 
@@ -19,12 +19,18 @@ const compress = require('./compress')
 
 const range = require('./range');
 
-module.exports = async function(req,res,filePath){
+const isFresh = require('./cache')
+module.exports = async function(req,res,filePath,config){
     try {
         const stats = await stat(filePath) 
           if(stats.isFile()){
             const contentType = mime(filePath);
             res.setHeader('Content-Type',contentType)
+            if(isFresh(stats,req,res)){ // 如果缓存还存在
+                res.statusCode = 304;
+                res.end()
+                return;
+            }
             let rs;
             const { code , start , end } = range(stats.size,req,res)
             if(code === 200) {
@@ -64,4 +70,4 @@ module.exports = async function(req,res,filePath){
           res.setHeader('Content-Type','text/plain');
           res.end("some bugs may happen on demo ")
       }
-} 
+}
