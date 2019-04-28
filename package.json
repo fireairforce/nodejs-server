@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/fireairforce/nodejs-server#readme",
   "dependencies": {
-    "chalk": "^2.4.2"
+    "chalk": "^2.4.2",
+    "handlebars": "^4.1.2"
   }
 }
