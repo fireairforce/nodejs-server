@@ -13,12 +13,15 @@ const source = fs.readFileSync(tplPath);
 // fs会读出来一个buffer文件流，这里在传入模板引擎去进行编译的时候修改为字符串类型
 const template = HandleBars.compile(source.toString()) 
 
+const mime = require('../helper/mime')
+
 module.exports = async function(req,res,filePath){
     try {
         const stats = await stat(filePath) 
           if(stats.isFile()){
+            const contentType = mime(filePath);
             res.statusCode = 200;
-            res.setHeader('Content-Type','text/plain')
+            res.setHeader('Content-Type',contentType)
             fs.createReadStream(filePath).pipe(res)
           } else if(stats.isDirectory()) {
               const files = await readdir(filePath); // 这里一定要加上await的关键字
